@@ -41,6 +41,7 @@ def solve(bot, update):
     update.message.reply_photo(photo=res.raw, force_reply=True)
 
 def session(bot, update, args):
+    user_id = update.message.from_user.id
     data = {'txtCartao1': '5067542566047015', 'captcha': args[0]}
     res = sess[user_id].post('https://www.meualelo.com.br/SaldoExtratoValidacaoServlet', data=data)
     print(res.text)

@@ -44,7 +44,9 @@ def session(bot, update, args):
     user_id = update.message.from_user.id
     data = {'txtCartao1': '5067542566047015', 'captcha': args[0]}
     res = sess[user_id].post('https://www.meualelo.com.br/SaldoExtratoValidacaoServlet', data=data)
+    token = res.text.split('https://www.cartoesbeneficio.com.br/inst/SaldoExtratoAleloFiltro.jsp?ticket=')[1].split("'")[0]
     print(res.text)
+    print(token)
     # update.message.reply_text('O seu token salvo: {}'.format(str(token)))
 
 def balance(bot, update):

@@ -28,13 +28,13 @@ def set_card_token(bot, update, args):
 def get_card_token(bot, update):
     user_id = update.message.from_user.id
     key = '{}_card_token'.format(user_id)
-    token = r.get(key).encode()
+    token = r.get(key).decode('utf-8')
     update.message.reply_text('O seu token salvo: {}'.format(str(token)))
 
 def balance(bot, update):
     user_id = update.message.from_user.id
     key = '{}_card_token'.format(user_id)
-    token = str(r.get(key))
+    token = r.get(key).decode('utf-8')
     response = requests.get('https://www.cartoesbeneficio.com.br/inst/convivencia/SaldoExtratoAlelo.jsp?ticket={}&primeiroAcesso=S&origem=Alelo'.format(token))
     balance = response.text.split('<span style="color: #008060;">')[1].split('</span>')[0]
     update.message.reply_text('Seu saldo: R$ {}'.format(str(balance)))

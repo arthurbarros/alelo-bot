@@ -36,7 +36,7 @@ def solve(bot, update):
     s = requests.Session()
     res = s.get('https://www.meualelo.com.br/inst/images/captcha.jpg', stream=True)
     res.raw.decode_content = True
-    update.message.reply_photo(photo=res.raw)
+    update.message.reply_photo(photo=res.raw, force_reply=True)
 
 def balance(bot, update):
     user_id = update.message.from_user.id

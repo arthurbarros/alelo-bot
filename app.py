@@ -35,11 +35,11 @@ def balance(bot, update):
     user_id = update.message.from_user.id
     key = '{}_card_token'.format(user_id)
     token = str(r.get(key))
-    
-    update.message.reply_text('O seu token salvo: {}'.format(str(token)))
+
     response = requests.get('https://www.cartoesbeneficio.com.br/inst/convivencia/SaldoExtratoAlelo.jsp?ticket={}&primeiroAcesso=S&origem=Alelo'.format(token))
-    balance = response.text.split('<span style="color: #008060;">')[1].split('</span>')[0]
-    update.message.reply_text('Seu saldo: R$ {}'.format(str(balance)))
+    # balance = response.text.split('<span style="color: #008060;">')[1].split('</span>')[0]
+    # update.message.reply_text('Seu saldo: R$ {}'.format(str(balance)))
+    update.message.reply_text(response.text)
 
 
 def help(bot, update):

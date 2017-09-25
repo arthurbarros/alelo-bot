@@ -19,7 +19,9 @@ sess = {}
 
 
 def start(bot, update):
-    update.message.reply_text('Bem Vindo, envie o numero do seu vale-refeicao utilizando o comando de exemplo: /meu_alelo 999111777222')
+    update.message.reply_text('Bem vindo!')
+    update.message.reply_text('O meu objetivo é consultar o saldo do seu vale-refeicao Alelo, sem voce precisar baixar o app ;)')
+    update.message.reply_text('Me envie o numero do seu vale-refeicao utilizando o comando /meu_alelo 999111777222')
 
 def meu_alelo(bot, update, args):
     user_id = update.message.from_user.id
@@ -27,7 +29,7 @@ def meu_alelo(bot, update, args):
     res = sess[user_id][0].get('https://www.meualelo.com.br/inst/images/captcha.jpg', stream=True)
     res.raw.decode_content = True
     update.message.reply_photo(photo=res.raw, force_reply=True)
-    update.message.reply_text('Informe as letras e numeros da imagem acima, ex: /resposta a1b2')
+    update.message.reply_text('Agora me informe as letras e numeros da imagem acima utilizando o comando /resposta a1b2')
 
 def session(bot, update, args):
     user_id = update.message.from_user.id
@@ -37,7 +39,7 @@ def session(bot, update, args):
     user_id = update.message.from_user.id
     key = '{}_card_token'.format(user_id)
     r.set(key, token)
-    balance(bot, update)
+    update.message.reply_text('Tudo pronto! Toda vez que quiser consultar o seu saldo eh so me enviar o comando /saldo')
     del sess[user_id]
 
 def balance(bot, update):

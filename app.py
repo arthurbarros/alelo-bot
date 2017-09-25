@@ -19,7 +19,7 @@ sess = {}
 
 
 def start(bot, update):
-    update.message.reply_text('Bem Vindo, por favor envie o seu token utilizando o comando de exemplo: /meu_alelo 999111777222')
+    update.message.reply_text('Bem Vindo, envie o numero do seu vale-refeicao utilizando o comando de exemplo: /meu_alelo 999111777222')
 
 def meu_alelo(bot, update, args):
     user_id = update.message.from_user.id

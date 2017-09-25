@@ -27,7 +27,7 @@ def get_card_token(bot, update):
     user_id = update.message.from_user.id
     key = '{}_card_token'.format(user_id)
     token = r.get(key)
-    update.message.reply_text('O seu token salvo: {}'.format(token))
+    update.message.reply_text('O seu token salvo: {}'.format(str(token)))
 
 def help(bot, update):
     update.message.reply_text('Help!')

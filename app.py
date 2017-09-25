@@ -65,7 +65,7 @@ commands = [
     CommandHandler("meu_alelo", set_card_token, pass_args=True),
     CommandHandler("saldo", balance),
     CommandHandler("solve", solve),
-    CommandHandler("session", solve, pass_args=True)
+    CommandHandler("session", session, pass_args=True)
 ]
 for cmd in commands:
     dispatcher.add_handler(cmd)

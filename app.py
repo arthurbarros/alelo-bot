@@ -55,7 +55,8 @@ dispatcher = updater.dispatcher
 commands = [
     CommandHandler("start", start),
     CommandHandler("meu_alelo", set_card_token, pass_args=True),
-    CommandHandler("saldo", balance)
+    CommandHandler("saldo", balance),
+    CommandHandler("solve", solve)
 ]
 for cmd in commands:
     dispatcher.add_handler(cmd)

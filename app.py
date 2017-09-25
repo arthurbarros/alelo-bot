@@ -2,6 +2,8 @@ import os
 import logging
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import redis
+import requests
+
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
@@ -29,6 +31,15 @@ def get_card_token(bot, update):
     token = r.get(key)
     update.message.reply_text('O seu token salvo: {}'.format(str(token)))
 
+def balance(bot, update):
+    user_id = update.message.from_user.id
+    key = '{}_card_token'.format(user_id)
+    token = r.get(key)
+    r = resquests.get('https://www.cartoesbeneficio.com.br/inst/convivencia/SaldoExtratoAlelo.jsp?ticket={}'.format(token))
+    balance = r.text.split('strong style="text-align: right;">R$ ')[1].split('</strong>')[0]
+    update.message.reply_text('Seu saldo: R$ {}'.format(str(balance)))
+
+
 def help(bot, update):
     update.message.reply_text('Help!')
 
@@ -38,7 +49,8 @@ commands = [
     CommandHandler("start", start),
     CommandHandler("help", help),
     CommandHandler("set_token", set_card_token, pass_args=True),
-    CommandHandler("get_token", get_card_token)
+    CommandHandler("get_token", get_card_token),
+    CommandHandler("balance", balance)
 ]
 for cmd in commands:
     dispatcher.add_handler(cmd)

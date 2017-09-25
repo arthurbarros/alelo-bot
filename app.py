@@ -16,7 +16,7 @@ updater.bot.setWebhook("https://alelo-bot.herokuapp.com/" + telegram_token)
 r = redis.from_url(os.environ.get("REDIS_URL"))
 
 def start(bot, update):
-    update.message.reply_text('Hi!')
+    update.message.reply_text('Bem Vindo, por favor envie o seu token utilizando o comando de exemplo: /set_token abcd1234')
 
 def set_card_token(bot, update, args):
     token = args[0]

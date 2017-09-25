@@ -32,6 +32,7 @@ def get_card_token(bot, update):
     update.message.reply_text('O seu token salvo: {}'.format(str(token)))
 
 def balance(bot, update):
+    r = redis.from_url(os.environ.get("REDIS_URL"))
     user_id = update.message.from_user.id
     key = '{}_card_token'.format(user_id)
     token = r.get(key)

@@ -37,7 +37,7 @@ dispatcher = updater.dispatcher
 commands = [
     CommandHandler("start", start),
     CommandHandler("help", help),
-    CommandHandler("set_token", set_card_token, pass_args=True)
+    CommandHandler("set_token", set_card_token, pass_args=True),
     CommandHandler("get_token", get_card_token)
 ]
 for cmd in commands:

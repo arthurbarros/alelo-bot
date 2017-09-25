@@ -15,6 +15,7 @@ updater = Updater(telegram_token)
 updater.start_webhook(listen="0.0.0.0", port=port, url_path=telegram_token)
 updater.bot.setWebhook("https://alelo-bot.herokuapp.com/" + telegram_token)
 r = redis.from_url(os.environ.get("REDIS_URL"))
+sess = {}
 
 def start(bot, update):
     update.message.reply_text('Bem Vindo, por favor envie o seu token utilizando o comando de exemplo: /meu_alelo abcd1234')
@@ -33,10 +34,17 @@ def get_card_token(bot, update):
     update.message.reply_text('O seu token salvo: {}'.format(str(token)))
 
 def solve(bot, update):
-    s = requests.Session()
-    res = s.get('https://www.meualelo.com.br/inst/images/captcha.jpg', stream=True)
+    user_id = update.message.from_user.id
+    sess[user_id] = requests.Session()
+    res = sess[user_id].get('https://www.meualelo.com.br/inst/images/captcha.jpg', stream=True)
     res.raw.decode_content = True
     update.message.reply_photo(photo=res.raw, force_reply=True)
+
+def session(bot, update, args):
+    data = {'txtCartao1': '5067542566047015', 'captcha': args[0]}
+    res = sess[user_id].post('https://www.meualelo.com.br/SaldoExtratoValidacaoServlet', data=data)
+    print(res.text)
+    # update.message.reply_text('O seu token salvo: {}'.format(str(token)))
 
 def balance(bot, update):
     user_id = update.message.from_user.id
@@ -56,7 +64,8 @@ commands = [
     CommandHandler("start", start),
     CommandHandler("meu_alelo", set_card_token, pass_args=True),
     CommandHandler("saldo", balance),
-    CommandHandler("solve", solve)
+    CommandHandler("solve", solve),
+    CommandHandler("session", solve, pass_args=True)
 ]
 for cmd in commands:
     dispatcher.add_handler(cmd)

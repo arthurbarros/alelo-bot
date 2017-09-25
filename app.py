@@ -28,7 +28,7 @@ def set_card_token(bot, update, args):
 def get_card_token(bot, update):
     user_id = update.message.from_user.id
     key = '{}_card_token'.format(user_id)
-    token = r.get(key)
+    token = r.get(key).encode()
     update.message.reply_text('O seu token salvo: {}'.format(str(token)))
 
 def balance(bot, update):

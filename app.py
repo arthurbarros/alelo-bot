@@ -18,9 +18,9 @@ def start(bot, update):
 
 def amount_help(bot, update):
     helps = r.get('help_count')
-    helps = helps if helps == None else 0
+    helps = helps if helps else 0
     helps += 1
-    r.set('helps', helps)
+    r.set('help_count', helps)
     update.message.reply_text(helps)
 
 def help(bot, update):

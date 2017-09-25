@@ -11,7 +11,7 @@ updater = Updater(telegram_token)
 
 updater.start_webhook(listen="0.0.0.0", port=port, url_path=telegram_token)
 updater.bot.setWebhook("https://alelo-bot.herokuapp.com/" + telegram_token)
-r = redis.StrictRedis(host=os.environ.get('REDIS_URL'), db=0)
+r = redis.from_url(os.environ.get("REDIS_URL"))
 
 def start(bot, update):
     update.message.reply_text('Hi!')

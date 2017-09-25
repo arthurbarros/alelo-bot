@@ -47,10 +47,8 @@ def help(bot, update):
 dispatcher = updater.dispatcher
 commands = [
     CommandHandler("start", start),
-    CommandHandler("help", help),
-    CommandHandler("set_token", set_card_token, pass_args=True),
-    CommandHandler("get_token", get_card_token),
-    CommandHandler("balance", balance)
+    CommandHandler("meu_alelo", set_card_token, pass_args=True),
+    CommandHandler("saldo", balance)
 ]
 for cmd in commands:
     dispatcher.add_handler(cmd)

@@ -53,7 +53,7 @@ dispatcher = updater.dispatcher
 commands = [
     CommandHandler("start", start),
     CommandHandler("saldo", balance),
-    CommandHandler("meu_alelo", solve, pass_args=True),
+    CommandHandler("meu_alelo", meu_alelo, pass_args=True),
     CommandHandler("resposta", session, pass_args=True)
 ]
 for cmd in commands:

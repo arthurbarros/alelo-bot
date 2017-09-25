@@ -16,12 +16,18 @@ r = redis.from_url(os.environ.get("REDIS_URL"))
 def start(bot, update):
     update.message.reply_text('Hi!')
 
-def amount_help(bot, update):
-    helps = r.get('help_count')
-    helps = int(helps) if helps else 0
-    helps += 1
-    r.set('help_count', helps)
-    update.message.reply_text(helps)
+def set_card_token(bot, update, args):
+    token = args[0]
+    user_id = update.message.from_user.id
+    key = '{}_card_token'.format(user_id)
+    r.set(key, token)
+    update.message.reply_text('O token salvo.')
+
+def get_card_token(bot, update):
+    user_id = update.message.from_user.id
+    key = '{}_card_token'.format(user_id)
+    token = r.get(key)
+    update.message.reply_text('O seu token salvo: {}'.format(token))
 
 def help(bot, update):
     update.message.reply_text('Help!')
@@ -31,7 +37,8 @@ dispatcher = updater.dispatcher
 commands = [
     CommandHandler("start", start),
     CommandHandler("help", help),
-    CommandHandler("c_help", amount_help)
+    CommandHandler("set_token", set_card_token, pass_args=True)
+    CommandHandler("get_token", get_card_token)
 ]
 for cmd in commands:
     dispatcher.add_handler(cmd)

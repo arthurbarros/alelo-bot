@@ -3,6 +3,7 @@ import logging
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import redis
 import requests
+from io import BytesIO
 
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -30,6 +31,12 @@ def get_card_token(bot, update):
     key = '{}_card_token'.format(user_id)
     token = r.get(key).decode('utf-8')
     update.message.reply_text('O seu token salvo: {}'.format(str(token)))
+
+def solve(bot, update):
+    s = requests.Session()
+    res = s.get('https://www.meualelo.com.br/inst/images/captcha.jpg', stream=True)
+    res.raw.decode_content = True
+    bot.send_photo(chat_id, photo=res.raw)
 
 def balance(bot, update):
     user_id = update.message.from_user.id

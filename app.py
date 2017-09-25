@@ -24,11 +24,13 @@ def help(bot, update):
     update.message.reply_text('Help!')
 
 
-dp = updater.dispatcher
-
-# on different commands - answer in Telegram
-dp.add_handler(CommandHandler("start", start))
-dp.add_handler(CommandHandler("help", help))
-dp.add_handler(CommandHandler("c_help", amount_help))
+dispatcher = updater.dispatcher
+commands = [
+    CommandHandler("start", start),
+    CommandHandler("help", help),
+    CommandHandler("c_help", amount_help)
+]
+for cmd in commands:
+    dispatcher.add_handler(cmd)
 
 updater.idle()

@@ -21,6 +21,7 @@ def amount_help(bot, update):
     helps = helps if helps else 0
     helps += 1
     r.set('helps', helps)
+    update.message.reply_text(helps)
 
 def help(bot, update):
     update.message.reply_text('Help!')

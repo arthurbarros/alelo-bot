@@ -5,7 +5,7 @@ The goal of this app is to fetch the current balance from Meu Alelo portal and d
 
 # Disclaimer
 
-I dont work for Alelo neighter authorized to develop a telegram bot on their behavior.
+I don't work for Alelo neither authorized to develop a telegram bot on their behalf.
 
 # MIT License
 

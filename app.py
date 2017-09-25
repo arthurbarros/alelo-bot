@@ -26,8 +26,8 @@ def meu_alelo(bot, update, args):
     sess[user_id] = (requests.Session(), args[0])
     res = sess[user_id][0].get('https://www.meualelo.com.br/inst/images/captcha.jpg', stream=True)
     res.raw.decode_content = True
-    update.message.reply_text('Informe as letras e numeros da imagem abaixo, ex: /resposta a1b2')
     update.message.reply_photo(photo=res.raw, force_reply=True)
+    update.message.reply_text('Informe as letras e numeros da imagem acima, ex: /resposta a1b2')
 
 def session(bot, update, args):
     user_id = update.message.from_user.id

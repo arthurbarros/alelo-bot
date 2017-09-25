@@ -39,6 +39,7 @@ def balance(bot, update):
     response = requests.get('https://www.cartoesbeneficio.com.br/inst/convivencia/SaldoExtratoAlelo.jsp?ticket={}&primeiroAcesso=S&origem=Alelo'.format(token))
     # balance = response.text.split('<span style="color: #008060;">')[1].split('</span>')[0]
     # update.message.reply_text('Seu saldo: R$ {}'.format(str(balance)))
+    print(response.text)
     update.message.reply_text(response.text)
 
 
